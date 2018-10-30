@@ -1,14 +1,12 @@
 sudo: false
 language: python
-matrix:
-  include:
-    - python: "2.7"
-      env: TOXENV=py27
-install:
-  - pip install tox-travis
-script:
-  - tox
-  - coverage run --source icon_font_to_png -m py.test
-  - coverage report -m
-after_success:
-  - coveralls
+branches:
+  only:
+  - master
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+install: pip install tox-travis
+script: tox
