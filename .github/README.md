@@ -4,6 +4,7 @@
 
 ![[Latest Version on PyPI](https://pypi.python.org/pypi/procfile-manager/)](https://img.shields.io/pypi/v/procfile-manager.svg)
 ![[Build Status](http://travis-ci.org/christophevg/py-procfile-manager)](https://secure.travis-ci.org/christophevg/py-procfile-manager.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/christophevg/py-procfile-manager/badge.svg?branch=master)](https://coveralls.io/github/christophevg/py-procfile-manager?branch=master)
 
 ## Rationale
 
