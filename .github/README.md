@@ -3,7 +3,7 @@
 > A Python module to manage Procfiles, running them in the first place, with as little restrictions as possible.
 
 ![[Latest Version on PyPI](https://pypi.python.org/pypi/procfile-manager/)](https://img.shields.io/pypi/v/procfile-manager.svg)
-![[Build Status](http://travis-ci.org/christophevg/procfile-manager)](https://secure.travis-ci.org/christophevg/procfile-manager.svg?branch=master)
+![[Build Status](http://travis-ci.org/christophevg/py-procfile-manager)](https://secure.travis-ci.org/christophevg/py-procfile-manager.svg?branch=master)
 
 ## Rationale
 
