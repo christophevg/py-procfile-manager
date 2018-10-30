@@ -2,13 +2,13 @@ import os
 import re
 import setuptools
 
-NAME             = "pypi-template"
+NAME             = "procfile-manager"
 AUTHOR           = "Christophe VG"
 AUTHOR_EMAIL     = "contact@christophe.vg"
-DESCRIPTION      = "PyPi template repository."
+DESCRIPTION      = "A Python module to manage Procfiles, running them in the first place, with as little restrictions as possible."
 LICENSE          = "MIT"
-KEYWORDS         = "pypi template"
-URL              = "https://github.com/christophevg/" + NAME
+KEYWORDS         = "procfile"
+URL              = "https://github.com/christophevg/py-" + NAME
 README           = ".github/README.md"
 CLASSIFIERS      = [
   "Environment :: Console",
@@ -19,19 +19,15 @@ CLASSIFIERS      = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
   "Programming Language :: Python :: 2",
-  "Programming Language :: Python :: 2.6",
   "Programming Language :: Python :: 2.7",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.3",
-  "Programming Language :: Python :: 3.4",
-  "Programming Language :: Python :: 3.5",
-  "Programming Language :: Python :: 3.6",
 ]
 INSTALL_REQUIRES = []
-ENTRY_POINTS     = {}
-SCRIPTS = [
-  'bin/pypi-template'
-]
+ENTRY_POINTS     = {
+  "console_scripts": [
+    "procfile-manager=procfile_manager.command:main"
+  ]
+}
+SCRIPTS          = []
 
 HERE = os.path.dirname(__file__)
 
