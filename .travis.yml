@@ -5,9 +5,10 @@ matrix:
     - python: "2.7"
       env: TOXENV=py27
 install:
-  - pip install tox
+  - pip install tox-travis
 script:
   - tox
+  - coverage run --source icon_font_to_png -m py.test
+  - coverage report -m
 after_success:
-  - tox -e coverage
-  - tox -e codecov
+  - coveralls
