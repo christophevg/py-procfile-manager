@@ -1,14 +1,14 @@
 import sys
 
-from procfile_manager import ProcfileManager
+from procfile_manager import Procfile, Manager
 
 def main():
-  procfile = "Procfile"
+  file = "Procfile"
   if len(sys.argv) > 1:
-    procfile = sys.argv[1]
-  manager = ProcfileManager()
-  manager.load(procfile)
-  manager.run()
+    file = sys.argv[1]
+  procfile = Procfile(file)
+  manager = Manager()
+  manager.run(procfile)
 
 if __name__ == "__main__":
-    main()
+  main()

@@ -40,10 +40,10 @@ EOT
 Python 2.7.13 (default, May 24 2017, 12:12:01) 
 [GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
->>> from procfile_manager import ProcfileManager
->>> manager = ProcfileManager(")
->>> manager.load("Procfile")
->>> manager.run()
+>>> from procfile_manager import Procfile, Manager
+>>> procfile = Procfile("Procfile")
+>>> manager = Manager()
+>>> manager.run(procfile)
 1
 2
 3
