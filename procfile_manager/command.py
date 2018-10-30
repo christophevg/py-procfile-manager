@@ -8,7 +8,11 @@ def main():
     file = sys.argv[1]
   procfile = Procfile(file)
   manager = Manager()
-  manager.run(procfile)
+  output = manager.run(procfile)
+  for name in output:
+    print(name)
+    print("-" * 80)
+    print(output[name])
 
 if __name__ == "__main__":
   main()

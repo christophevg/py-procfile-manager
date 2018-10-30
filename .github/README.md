@@ -2,8 +2,8 @@
 
 > A Python module to manage Procfiles, running them in the first place, with as little restrictions as possible.
 
-![[Latest Version on PyPI](https://pypi.python.org/pypi/procfile-manager/)](https://img.shields.io/pypi/v/procfile-manager.svg)
-![[Build Status](http://travis-ci.org/christophevg/py-procfile-manager)](https://secure.travis-ci.org/christophevg/py-procfile-manager.svg?branch=master)
+[![Latest Version on PyPI](https://img.shields.io/pypi/v/procfile-manager.svg)](https://pypi.python.org/pypi/procfile-manager/)
+[![Build Status](https://secure.travis-ci.org/christophevg/py-procfile-manager.svg?branch=master)](http://travis-ci.org/christophevg/py-procfile-manager)
 [![Coverage Status](https://coveralls.io/repos/github/christophevg/py-procfile-manager/badge.svg?branch=master)](https://coveralls.io/github/christophevg/py-procfile-manager?branch=master)
 
 ## Rationale
@@ -45,6 +45,16 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> procfile = Procfile("Procfile")
 >>> manager = Manager()
 >>> manager.run(procfile)
+{'demo': u'1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n'}
+>>> 
+```
+
+The module is also runnable. Given the same Procfile...
+
+```bash
+$ python -m procfile_manager
+demo
+--------------------------------------------------------------------------------
 1
 2
 3
@@ -55,5 +65,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 8
 9
 10
->>> 
 ```
