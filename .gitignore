@@ -6,3 +6,4 @@ build
 .coverage
 .tox
 Procfile
+docs/_build
