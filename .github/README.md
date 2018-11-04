@@ -4,8 +4,8 @@
 
 [![Latest Version on PyPI](https://img.shields.io/pypi/v/procfile-manager.svg)](https://pypi.python.org/pypi/procfile-manager/)
 [![Build Status](https://secure.travis-ci.org/christophevg/py-procfile-manager.svg?branch=master)](http://travis-ci.org/christophevg/py-procfile-manager)
+[![Documentation Status](https://readthedocs.org/projects/procfile-manager/badge/?version=latest)](https://procfile-manager.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/christophevg/py-procfile-manager/badge.svg?branch=master)](https://coveralls.io/github/christophevg/py-procfile-manager?branch=master)
-[![Documentation Status](https://readthedocs.org/projects/py-procfile-manager/badge/?version=latest)](https://py-procfile-manager.readthedocs.io/en/latest/?badge=latest)
 [![Built with PyPi Template](https://img.shields.io/badge/PyPi_Template-v0.0.3-blue.svg)](https://github.com/christophevg/pypi-template)
 
 ## Rationale
