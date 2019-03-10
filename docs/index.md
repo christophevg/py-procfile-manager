@@ -1,12 +1,13 @@
 # Procfile Manager
 
-> A Python module to manage Procfiles, running them in the first place, with as little restrictions as possible.
+> A Python module to manage Procfiles, running them in the first place, with as little restrictions as possible
 
 [![Latest Version on PyPI](https://img.shields.io/pypi/v/procfile-manager.svg)](https://pypi.python.org/pypi/procfile-manager/)
+[![Supported Implementations](https://img.shields.io/pypi/pyversions/procfile-manager.svg)](https://pypi.python.org/pypi/procfile-manager/)
 [![Build Status](https://secure.travis-ci.org/christophevg/py-procfile-manager.svg?branch=master)](http://travis-ci.org/christophevg/py-procfile-manager)
 [![Documentation Status](https://readthedocs.org/projects/procfile-manager/badge/?version=latest)](https://procfile-manager.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/christophevg/py-procfile-manager/badge.svg?branch=master)](https://coveralls.io/github/christophevg/py-procfile-manager?branch=master)
-[![Built with PyPi Template](https://img.shields.io/badge/PyPi_Template-v0.0.3-blue.svg)](https://github.com/christophevg/pypi-template)
+[![Built with PyPi Template](https://img.shields.io/badge/PyPi_Template-v0.0.6-blue.svg)](https://github.com/christophevg/pypi-template)
 
 ## Rationale
 
@@ -20,92 +21,14 @@ Once upon a time, not so long ago, at a desk pretty nearby, I needed a way to re
 * heywood 0.3
 * strawboss 0.2.0
 
-and I tried each one of them. I even proposed to one of the projects to create a rather large PR to expose the functionality in an open way. None were useable in my case, requiring a Python module to access its functionality (not just a command line interfaced script), requiring also Python 2.7 support (not only 3.5) and allowing the ProcessManager to be started in a thread (so not using any form of `signal`).
+and I tried each one of them. I even proposed to one of the projects to create a rather large PR to expose the functionality in an open way. None were useable in my case, requiring a Python module to access its functionality (not just a command line interfaced script) and allowing the ProcessManager to be started in a thread (so not using any form of `signal`).
 
-So there are my three good reasons for writing yet another Procfile module ;-)
+So there are my _good_ reasons for writing yet another Procfile module ;-)
 
 And although I couldn't use the mentioned projects as-is, I give most credit for the code in this repository to each one of them, teaching me again a lot about how to go about constructing a Python well-formed module, including testing,...
 
-## Getting Started
+## Contents
 
-```bash
-$ virtualenv venv
-
-$ . venv/bin/activate
-
-(venv) $ pip install procfile-manager
-
-$ echo > Procfile <<EOT
-demo: for i in `seq 1 10`; do echo $i; sleep 1; done
-EOT
-
-(venv) $ python
-Python 2.7.13 (default, May 24 2017, 12:12:01)
-[GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> from procfile_manager import Procfile, Manager
->>> procfile = Procfile("Procfile")
->>> manager = Manager()
->>> manager.run(procfile)
-2018-11-04 18:55:14,981 - root - DEBUG - starting process monitor
-2018-11-04 18:55:25,086 - root - DEBUG - process demo has stopped running
-2018-11-04 18:55:25,087 - root - DEBUG - all processes have finished
-{'demo': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n'}
->>> 
-```
-
-The module is also runnable. Given the same Procfile...
-
-```bash
-$ python -m procfile_manager
-demo
---------------------------------------------------------------------------------
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-```
-
-## Non-Blocking
-
-You can also instruct the manager to _not_ block when calling `run` on it:
-
-```bash
-(venv) $ python
-Python 2.7.13 (default, May 24 2017, 12:12:01)
-[GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> from procfile_manager import Procfile, Manager
->>> procfile = Procfile("Procfile")
->>> manager = Manager()
->>> manager.run(procfile, blocking=False)
-2018-11-04 18:56:53,316 - root - DEBUG - starting process monitor
->>> manager.running()
-True
->>> manager.running()
-True
-2018-11-04 18:57:03,434 - root - DEBUG - process demo has stopped running
-2018-11-04 18:57:03,435 - root - DEBUG - all processes have finished
->>> manager.running()
-False
->>> for name in manager.processes:
-...     print manager.processes[name]["output"]
-...
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
->>>
-```
+* [What's in the Box](whats-in-the-box.md)
+* [Getting Started](getting-started.md)
+* [Contributing](contributing.md)

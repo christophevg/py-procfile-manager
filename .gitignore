@@ -1,9 +1,10 @@
-venv
+venv*
 dist
 *.egg-info
 *.pyc
 build
 .coverage
 .tox
-Procfile
 docs/_build
+Procfile
+.env

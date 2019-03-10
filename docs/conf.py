@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('../'))
 # -- Project information -----------------------------------------------------
 
 project = u'Procfile Manager'
-copyright = u'2018, Christophe VG'
+copyright = u'2018-2019, Christophe VG'
 author = u'Christophe VG'
 
 from procfile_manager import __version__
@@ -39,7 +39,7 @@ release = __version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ["sphinx.ext.autodoc"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -51,6 +51,7 @@ templates_path = ['_templates']
 # source_suffix = '.rst'
 
 from recommonmark.parser import CommonMarkParser
+from recommonmark.transform import AutoStructify
 source_parsers = { ".md": CommonMarkParser }
 source_suffix  = ['.rst', '.md']
 
@@ -78,7 +79,7 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -154,8 +155,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'ProcfileManager', u'Procfile Manager Documentation',
-     author, 'PyPiTemplate',
-     'A Python module to manage Procfiles, running them in the first place, with as little restrictions as possible..',
+     author, 'ProcfileManager', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -176,3 +176,9 @@ epub_title = project
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
+
+def setup(app):
+  app.add_config_value('recommonmark_config', {
+    'auto_toc_tree_section': 'Contents'
+  }, True)
+  app.add_transform(AutoStructify)

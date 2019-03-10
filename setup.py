@@ -21,7 +21,9 @@ CLASSIFIERS      = [
   "Programming Language :: Python :: 2",
   "Programming Language :: Python :: 2.7",
 ]
-INSTALL_REQUIRES = []
+INSTALL_REQUIRES = [
+  "python-dotenv"
+]
 ENTRY_POINTS     = {
   "console_scripts": [
     "procfile-manager=procfile_manager.command:main"
