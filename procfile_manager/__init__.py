@@ -1,6 +1,7 @@
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 import os
+import time
 from dotenv import load_dotenv
 import logging
 
@@ -34,9 +35,10 @@ logger.setLevel(logging.getLevelName(LOG_LEVEL))
 
 
 class Procfile(object):
-  def __init__(self, file="Procfile"):  
+  def __init__(self, file="Procfile"):
+    self.file = str(file)
     self.processes = {}
-    with open(str(file), "r") as fp:
+    with open(self.file, "r") as fp:
       for line in fp.read().split("\n"):
         try:
           name, cmd = line.split(":", 2)
@@ -58,62 +60,58 @@ class Procfile(object):
       yield name
 
 class Process(object):
-  def __init__(self, cmd):
-    self.process = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    self.output  = b""
-    self.running = True
+  def __init__(self, name, cmd):
+    self.name = name
+    self.process = subprocess.Popen(
+      cmd,
+      stdout=subprocess.PIPE,
+      stderr=subprocess.PIPE,
+      shell=True
+    )
+
+  @property
+  def running(self):
+    return self.process.poll() == None
+
+  @property
+  def output(self):
+    return self.process.communicate()[0]
+  
+  def stop(self):
+    if not self.running: return
+    try:
+      self.process.kill()
+    except OSError as e:
+      logging.error("couldn't kill {0}: {1}".format(self.name, self.process.pid))
 
 class Manager(object):
-  def __init__(self):
+  def __init__(self, procfile):
+    self.procfile = procfile
     self.processes = {}
-    self.children = {}
-    self.monitor = None
   
-  def run(self, procfile, blocking=True):
-    for name in procfile:
-      self.processes[name] = Process(procfile[name])
-      self.processes[name] = {
-        "process": subprocess.Popen(procfile[name],
-                                    stdout=subprocess.PIPE,
-                                    shell=True),
-        "output": b"",
-        "running": True
-      }
-    self.monitor = threading.Thread(target=self.monitor_processes)
-    self.monitor.deamon = True
-    self.monitor.start()
+  def run(self, blocking=True):
+    for name in self.procfile:
+      self.processes[name] = Process(name, self.procfile[name])
+    logging.info("started all processes from {0}".format(self.procfile.file))
 
     if blocking:
       self.wait()
       output = {}
       for name in self.processes:
-        output[name] = self.processes[name]["output"]
+        output[name] = self.processes[name].output
       return output
-
-  def monitor_processes(self):
-    logging.debug("starting process monitor")
-    while self.running():
-      for name in self.processes:
-        if self.processes[name]["running"]:
-          b = self.processes[name]["process"].stdout.read(1)
-          if len(b) < 1:
-            if self.processes[name]["process"].poll() != None:
-              self.processes[name]["running"] = False
-              logging.info("process {0} has stopped running".format(name))
-          else:
-            self.processes[name]["output"] += b
-    logging.debug("all processes have finished")
 
   def running(self):
     still_running = False
     for name in self.processes:
-      still_running |= self.processes[name]["running"]
+      still_running |= self.processes[name].running
     return still_running
 
   def wait(self):
     while self.running():
-      time.sleep(.1)
+      time.sleep(0.1)
 
   def stop(self):
     for name in self.processes:
-      self.processes[name]["process"].kill()
+      self.processes[name].stop()
+    logging.info("stopped all processes from {0}".format(self.procfile.file))

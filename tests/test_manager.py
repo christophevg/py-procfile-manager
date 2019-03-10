@@ -11,8 +11,8 @@ def test_running_procfile_with_one_process(tmpdir):
   create_temporary_files(tmpdir, { "Procfile" : "{0}:{1}".format(name, cmd) })
 
   procfile = Procfile(tmpdir.join("Procfile"))
-  manager = Manager()
-  output = manager.run(procfile)
+  manager = Manager(procfile)
+  output = manager.run()
 
   assert len(output) == 1
   assert output[name] == b"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n"
@@ -27,8 +27,8 @@ def test_running_procfile_with_two_processes(tmpdir):
   })
 
   procfile = Procfile(tmpdir.join("Procfile"))
-  manager = Manager()
-  output = manager.run(procfile)
+  manager = Manager(procfile)
+  output = manager.run()
 
   assert len(output) == 2
   assert output[name1] == b"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n"
@@ -40,10 +40,10 @@ def test_stopping_non_blocking_execution(tmpdir):
   create_temporary_files(tmpdir, { "Procfile" : "{0}:{1}".format(name, cmd) })
 
   procfile = Procfile(tmpdir.join("Procfile"))
-  manager = Manager()
-  manager.run(procfile, blocking=False)
+  manager = Manager(procfile)
+  manager.run(blocking=False)
   time.sleep(1.75)
   manager.stop()
   time.sleep(1)
-  assert manager.processes[name]["running"] == False
-  assert manager.processes[name]["output"] == b"1\n2\n"
+  assert not manager.processes[name].running
+  assert manager.processes[name].output == b"1\n2\n"

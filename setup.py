@@ -18,8 +18,8 @@ CLASSIFIERS      = [
   "Topic :: Software Development",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 2",
   "Programming Language :: Python :: 2.7",
+  "Programming Language :: Python :: 3.7"
 ]
 INSTALL_REQUIRES = [
   "python-dotenv"
