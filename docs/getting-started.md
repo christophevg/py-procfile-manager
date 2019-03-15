@@ -25,8 +25,8 @@ Python 2.7.13 (default, May 24 2017, 12:12:01)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from procfile_manager import Procfile, Manager
 >>> procfile = Procfile("Procfile")
->>> manager = Manager()
->>> manager.run(procfile)
+>>> manager = Manager(procfile)
+>>> manager.run()
 2018-11-04 18:55:14,981 - root - DEBUG - starting process monitor
 2018-11-04 18:55:25,086 - root - DEBUG - process demo has stopped running
 2018-11-04 18:55:25,087 - root - DEBUG - all processes have finished
