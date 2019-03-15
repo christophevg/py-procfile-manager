@@ -60,13 +60,14 @@ class Procfile(object):
       yield name
 
 class Process(object):
-  def __init__(self, name, cmd):
+  def __init__(self, name, cmd, cwd=None):
     self.name = name
     self.process = subprocess.Popen(
       cmd,
       stdout=subprocess.PIPE,
       stderr=subprocess.PIPE,
-      shell=True
+      shell=True,
+      cwd=cwd
     )
 
   @property
@@ -89,9 +90,9 @@ class Manager(object):
     self.procfile = procfile
     self.processes = {}
   
-  def run(self, blocking=True):
+  def run(self, blocking=True, cwd=None):
     for name in self.procfile:
-      self.processes[name] = Process(name, self.procfile[name])
+      self.processes[name] = Process(name, self.procfile[name], cwd)
     logging.info("started all processes from {0}".format(self.procfile.file))
 
     if blocking:
